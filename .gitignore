@@ -1,0 +1,30 @@
+﻿# Environment and credentials
+ENVIRONMENT
+.env
+service-account-key.json
+*-key.json
+
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Logs and temporary files
+logs/
+cache/
+*.log
+debug.log
+
+# IDE and system files
+.*
+!.gitignore
+!.geminiignore
+!.env.example
+~*
+
+# Documentation (if you want to keep these private)
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+/QWEN.md
+/SPEC.md

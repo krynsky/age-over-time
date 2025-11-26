@@ -1,0 +1,24 @@
+{
+    "run": [
+        {
+            "method": "shell.start",
+            "params": {
+                "path": ".",
+                "message": "venv\\Scripts\\uvicorn main:app --reload --port 8000",
+                "on": [
+                    {
+                        "event": "/http:\/\/127.0.0.1:8000/",
+                        "return": true
+                    }
+                ]
+            }
+        },
+        {
+            "method": "browser.open",
+            "params": {
+                "uri": "http://127.0.0.1:8000/static/index.html",
+                "target": "_blank"
+            }
+        }
+    ]
+}

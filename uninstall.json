@@ -1,0 +1,17 @@
+{
+    "run": [
+        {
+            "method": "shell.run",
+            "params": {
+                "message": "rmdir /s /q venv"
+            }
+        },
+        {
+            "method": "notify",
+            "params": {
+                "html": "Uninstalled",
+                "href": "pinokio.js"
+            }
+        }
+    ]
+}
