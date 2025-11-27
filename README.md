@@ -6,14 +6,14 @@ A web application that transforms your photo showing how you would look styled t
 
 - Upload your photo
 - Generate a 4×4 grid showing you styled through 16 decades (1880s-2030s)
-- AI-powered image generation using fal.ai's Nano Banana Pro
+- AI-powered image generation using Google's Nano Banana Pro through fal.ai
 - Period-accurate styling including:
   - Clothing, fashion, and accessories
   - Hairstyles and grooming
   - Photography styles (sepia, B&W, color)
   - Era-appropriate backgrounds and props
 - Download your generated image
-- Beautiful, modern web interface
+- Modern web interface
 
 ## Platform Support
 
