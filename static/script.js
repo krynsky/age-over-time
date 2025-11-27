@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingOverlay.style.display = 'flex';
         resultsGrid.innerHTML = '';
         resultsGrid.classList.remove('visible');
-        uploadArea.style.display = 'none'; // Optional: hide upload area or move it
+        uploadArea.style.display = 'none';
 
         const formData = new FormData();
         formData.append('file', file);
@@ -67,36 +67,73 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
-            renderResults(data.results);
+            renderResults(data);
 
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred while processing the image.');
-            uploadArea.style.display = 'flex'; // Show upload area again on error
+            uploadArea.style.display = 'flex';
         } finally {
             loadingOverlay.style.display = 'none';
         }
     }
 
-    function renderResults(results) {
+    function renderResults(data) {
         resultsGrid.innerHTML = '';
-        
-        results.forEach((item, index) => {
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            gridItem.style.animationDelay = `${index * 100}ms`;
-            
-            gridItem.innerHTML = `
-                <img src="${item.image}" alt="Age ${item.age}">
-                <div class="age-label">Age ${item.age}</div>
-            `;
-            
-            resultsGrid.appendChild(gridItem);
+
+        // Create a container for the grid image
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'grid-image-container';
+
+        const gridImg = document.createElement('img');
+        gridImg.src = data.grid_image;
+        gridImg.alt = 'Decades through time grid';
+        gridImg.className = 'grid-image';
+
+        gridContainer.appendChild(gridImg);
+
+        // Add decade labels overlay (4×4 grid)
+        const labelsOverlay = document.createElement('div');
+        labelsOverlay.className = 'age-labels-overlay';
+
+        data.decades.forEach((decade, index) => {
+            const label = document.createElement('div');
+            label.className = 'age-label-grid';
+            label.textContent = decade;
+
+            // Position labels in 4×4 grid
+            const row = Math.floor(index / 4);
+            const col = index % 4;
+            label.style.gridColumn = col + 1;
+            label.style.gridRow = row + 1;
+
+            labelsOverlay.appendChild(label);
         });
 
+        gridContainer.appendChild(labelsOverlay);
+        resultsGrid.appendChild(gridContainer);
+
+        // Add download button
+        const downloadBtn = document.createElement('button');
+        downloadBtn.className = 'download-btn';
+        downloadBtn.innerHTML = `
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Download Image
+        `;
+        downloadBtn.onclick = () => downloadImage(data.grid_image, data.decades[0] || 'decades');
+        resultsGrid.appendChild(downloadBtn);
+
         resultsGrid.classList.add('visible');
-        
-        // Add a "Try Again" button or similar if desired
-        // For now, we can just leave the grid visible
+    }
+
+    function downloadImage(imageDataUrl, decade) {
+        const link = document.createElement('a');
+        link.href = imageDataUrl;
+        link.download = `decades-through-time-${decade}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     }
 });

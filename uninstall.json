@@ -1,9 +1,9 @@
 {
     "run": [
         {
-            "method": "shell.run",
+            "method": "fs.rm",
             "params": {
-                "message": "rmdir /s /q venv"
+                "path": "venv"
             }
         },
         {

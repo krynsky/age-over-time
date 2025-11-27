@@ -1,6 +1,7 @@
 fastapi
 python-multipart
 uvicorn
-pillow
-google-cloud-aiplatform
 python-dotenv
+pillow
+fal-client
+requests
