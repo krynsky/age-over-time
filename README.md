@@ -2,6 +2,8 @@
 
 A web application that transforms your photo showing how you would look styled through different decades from the 1880s to 2030s.
 
+![alt text](image.png)
+
 ## Features
 
 - Upload your photo
